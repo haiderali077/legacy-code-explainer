@@ -65,4 +65,3 @@ Visit `http://localhost:8080` to get started.
 
 ---
 
-**Built at nwHacks 2026** 🚀
