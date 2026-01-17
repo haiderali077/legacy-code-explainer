@@ -30,7 +30,7 @@ python main.py
 
 ### Frontend
 ```bash
-cd frontend/story-code-ai-main
+cd frontend
 npm install
 npm run dev
 ```
@@ -63,6 +63,3 @@ Visit `http://localhost:8080` to get started.
 - **Query Parser**: Uses Gemini to classify user questions
 - **Commit Summarization**: Cortex-powered summaries for code context
 
----
-
-**Built at nwHacks 2026** 🚀
