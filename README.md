@@ -1,52 +1,18 @@
 # Legacy Code Explained
 
-An AI-powered Git repository analysis tool that helps developers understand how a codebase has evolved. Analyze commit history, search repositories using natural language, and discover when and why changes were made.
+AI-powered Git repository analysis that helps developers understand how a codebase has evolved over time. Analyze commit history, search repositories using natural language, and quickly discover when, why, and how code changed.
 
-## Features
+## What It Does
 
 - Analyze GitHub repositories using AI-generated commit summaries
-- Search commit history using natural language
-- Combine semantic search with date and author filters
-- View interactive commit history
-- Find the most relevant commits with vector similarity search
-- Authenticate securely with GitHub OAuth
+- Search commit history using natural language instead of keywords
+- Combine semantic search with date and author filtering
+- Generate vector embeddings using Snowflake Cortex for fast similarity search
+- Visualize repository history with an interactive commit graph
+- Connect securely to GitHub using OAuth
+- View AI responses with relevant commit references
 
-## How It Works
-
-```
-GitHub Repository
-        │
-        ▼
-Fetch Commit History
-        │
-        ▼
-Generate AI Summaries
-        │
-        ▼
-Create Vector Embeddings
-        │
-        ▼
-Store in Snowflake
-        │
-        ▼
-User Question
-        │
-        ▼
-Semantic / Temporal Search
-        │
-        ▼
-AI Response with Relevant Commits
-```
-
-Each commit is summarized using AI and converted into vector embeddings with Snowflake Cortex. When a user asks a question, the system retrieves the most relevant commits using vector similarity search before generating a contextual response.
-
-## Search Modes
-
-| Mode | Description |
-|------|-------------|
-| Semantic | Search using natural language such as "When was authentication added?" |
-| Temporal | Filter commits by date or author |
-| Hybrid | Combine semantic search with metadata filters |
+---
 
 ## Tech Stack
 
@@ -57,26 +23,11 @@ Each commit is summarized using AI and converted into vector embeddings with Sno
 | Database | Snowflake |
 | AI | Snowflake Cortex, OpenRouter |
 | Authentication | GitHub OAuth |
+| Secrets | 1Password Service Accounts |
 
-## Project Structure
+---
 
-```text
-backend/
-├── app/
-│   ├── routers/
-│   ├── services/
-│   ├── database/
-│   ├── security/
-│   └── main.py
-
-frontend/
-└── src/
-    ├── components/
-    ├── pages/
-    └── lib/
-```
-
-## Getting Started
+## Quick Start
 
 ### Backend
 
@@ -101,24 +52,142 @@ Open the application at:
 http://localhost:8080
 ```
 
-## API Overview
+---
 
-| Endpoint | Description |
-|----------|-------------|
-| `/auth/github` | GitHub OAuth authentication |
-| `/api/repositories` | List user repositories |
-| `/api/repositories/analyze` | Analyze repository commits |
-| `/api/repositories/{id}/cortex-query` | Ask questions about repository history |
-| `/api/repositories/{id}/commits` | Retrieve commit history |
+## Features
+
+- GitHub OAuth authentication
+- Repository selection and commit analysis
+- AI-generated commit summaries
+- Vector embeddings for semantic search
+- Semantic, temporal, and hybrid search
+- Interactive commit history visualization
+- AI responses with supporting commit references
+
+---
+
+## How It Works
+
+1. **Connect Repository**  
+   Sign in with GitHub and select a repository.
+
+2. **Analyze Commits**  
+   Fetch the repository's commit history and generate AI summaries.
+
+3. **Generate Embeddings**  
+   Convert commit summaries into vector embeddings using Snowflake Cortex.
+
+4. **Ask Questions**  
+   Search your repository using natural language.
+
+5. **Retrieve Relevant Commits**  
+   The system performs semantic, temporal, or hybrid search to find the most relevant commits.
+
+6. **Generate an Answer**  
+   AI produces a contextual response with links to the supporting commits.
+
+---
+
+## Search Modes
+
+| Mode | Example |
+|------|---------|
+| **Semantic** | "Why was the authentication system refactored?" |
+| **Temporal** | "Show commits from last week." |
+| **Hybrid** | "Authentication changes made during March." |
+
+---
+
+## Example Queries
+
+- When was JWT authentication implemented?
+- Why was the caching layer introduced?
+- Show commits related to API performance.
+- What database schema changes were made last month?
+- Who implemented the notification system?
+
+---
+
+## Architecture
+
+```text
+                    GitHub Repository
+                           │
+                           ▼
+                 Fetch Commit History
+                           │
+                           ▼
+               AI Commit Summaries
+                           │
+                           ▼
+      Snowflake Cortex Vector Embeddings
+                           │
+                           ▼
+           Snowflake Vector Database
+                           │
+                           ▼
+               Natural Language Query
+                           │
+                           ▼
+     Semantic / Temporal / Hybrid Search
+                           │
+                           ▼
+        AI Response + Relevant Commits
+```
+
+---
 
 ## Key Technologies
 
-- Snowflake Cortex for AI summaries and vector embeddings
-- Snowflake Vector Search for semantic retrieval
-- FastAPI REST backend
-- React + TypeScript frontend
-- GitHub OAuth authentication
-- OpenRouter for query classification
+- **Snowflake Cortex** for AI-generated commit summaries and vector embeddings
+- **Vector similarity search** using cosine similarity for semantic retrieval
+- **Hybrid search** combining semantic similarity with metadata filters
+- **FastAPI** backend for repository analysis and search APIs
+- **React + TypeScript** frontend for an interactive user experience
+- **GitHub OAuth** for secure repository authentication
+- **OpenRouter** for natural language query classification
+
+---
+
+## Project Structure
+
+```text
+.
+├── backend/
+│   ├── app/
+│   │   ├── core/
+│   │   ├── database/
+│   │   ├── routers/
+│   │   ├── security/
+│   │   ├── services/
+│   │   └── main.py
+│   ├── requirements.txt
+│   └── .env.example
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── hooks/
+│   │   ├── lib/
+│   │   └── assets/
+│   ├── package.json
+│   └── vite.config.ts
+│
+└── README.md
+```
+
+---
+
+## Future Improvements
+
+- Support multiple branches and pull request analysis
+- Repository-wide code search alongside commit history
+- Team collaboration and shared workspaces
+- Additional filtering by file path and contributor
+- Export AI-generated reports and repository insights
+
+---
 
 ## License
 
