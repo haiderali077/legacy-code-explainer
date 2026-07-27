@@ -17,12 +17,20 @@ CodeAncestry connects to GitHub repositories, analyzes commit history using AI, 
 
 ## Key Features
 
-- **Semantic Commit Search** — Query your repository in natural language ("Why was the auth system refactored?")
-- **Automatic Commit Analysis** — AI-generated summaries for every commit, stored as vector embeddings
-- **Hybrid Query Modes** — Temporal filters (by date/author), semantic relevance, or combined
-- **Vector Similarity Search** — Snowflake Cortex generates 768-dimensional embeddings with cosine similarity ranking
+- **Semantic Commit Search** — Ask questions about your repository in natural language
+- **Commit Analysis** — Automatically analyzes all commits with AI-powered summaries
+- **Hybrid Queries** — Search by temporal filters, semantic relevance, or both
+- **Vector Embeddings** — Snowflake Cortex for fast, accurate similarity matching
+- **GitHub Integration** — Connect directly to GitHub repositories via OAuth
 - **Source Citation** — Every answer references specific commits with similarity scores
 - **Interactive Visualization** — Commit graph with relevance scoring, code diff viewer, and file tree
+
+## How It Works
+
+1. **Connect GitHub** — OAuth login and select a repository
+2. **Analyze Commits** — Fetch all commits and generate AI summaries and embeddings
+3. **Ask Questions** — Query your repository with natural language
+4. **Get Answers** — AI finds relevant commits and explains the context with citations
 
 ## Architecture
 
@@ -34,9 +42,23 @@ Frontend (React) → FastAPI → GitHub API
               Vector DB + Relational Tables
 ```
 
-- **RAG Pipeline**: Question → Embedding → Vector similarity search → Context retrieval → LLM answer generation
-- **Query Parser**: Classifies queries as temporal, semantic, or hybrid using Gemini
-- **Data Flow**: GitHub commits → Gemini summarization → Snowflake embeddings → Cortex-powered Q&A
+### RAG Pipeline
+
+Question is converted to an embedding via Snowflake Cortex, matched against commit embeddings using cosine similarity, and the top results are fed to an LLM for answer generation.
+
+- **Semantic Search**: Vector similarity matching against commit embeddings
+- **Temporal Search**: Date and author filtering with SQL constraints
+- **Hybrid Search**: Combined temporal filtering plus semantic relevance scoring
+
+### Query Parser
+
+Uses Gemini to classify user questions into three categories: temporal (time-based), semantic (meaning-based), or hybrid (both). Extracts filters like author, file paths, and date ranges from natural language.
+
+### Data Flow
+
+```
+GitHub commits → Gemini summarization → Snowflake embeddings → Cortex-powered Q&A
+```
 
 ## Project Structure
 
