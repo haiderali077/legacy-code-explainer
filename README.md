@@ -42,20 +42,13 @@ Frontend (React) → FastAPI → GitHub API
               Vector DB + Relational Tables
 ```
 
-- **Cortex RAG**: Retrieval-Augmented Generation using Snowflake Cortex
-  - Temporal search: Date/author filtering
-  - Semantic search: Vector similarity matching
-  - Hybrid search: Combined filtering + semantic relevance
-- **Query Parser**: Uses Gemini to classify user questions
-- **Commit Summarization**: Cortex-powered summaries for code context
-
 ### RAG Pipeline
 
 Question is converted to an embedding via Snowflake Cortex, matched against commit embeddings using cosine similarity, and the top results are fed to an LLM for answer generation.
 
-- **Semantic Search**: Vector similarity matching against commit embeddings
-- **Temporal Search**: Date and author filtering with SQL constraints
-- **Hybrid Search**: Combined temporal filtering plus semantic relevance scoring
+- **Semantic search**: Vector similarity matching against commit embeddings
+- **Temporal search**: Date and author filtering with SQL constraints
+- **Hybrid search**: Combined temporal filtering plus semantic relevance scoring
 
 ### Query Parser
 
