@@ -178,17 +178,6 @@ http://localhost:8080
 ```
 
 ---
-
-## Future Improvements
-
-- Support multiple branches and pull request analysis
-- Repository-wide code search alongside commit history
-- Team collaboration and shared workspaces
-- Additional filtering by file path and contributor
-- Export AI-generated reports and repository insights
-
----
-
 ## License
 
 MIT
